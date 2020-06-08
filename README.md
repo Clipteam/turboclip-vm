@@ -1,7 +1,5 @@
 <div align="center">
-
 # clipcc-vm
-
 </div>
 
 #### ClipCC VM is a library for representing, running, and maintaining the state of computer programs written using [ClipCC Blocks](https://github.com/Clipteam/clipcc-block).
@@ -121,3 +119,5 @@ yarn run deploy -- -r <your repo url>
 
 ## Donate
 We provide [Scratch](https://scratch.mit.edu) free of charge, and want to keep it that way! Please consider making a [donation](https://secure.donationpay.org/scratchfoundation/) to support our continued engineering, design, community, and resource development efforts. Donations of any size are appreciated. Thank you!
+
+-->

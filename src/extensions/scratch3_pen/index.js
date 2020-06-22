@@ -795,7 +795,9 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     penDown (args, util) {
-        const target = util.target;
+        this._penDown(util.target);
+    }
+    _penDown (target) { // used by compiler
         const penState = this._getPenState(target);
 
         if (!penState.penDown) {
@@ -816,7 +818,9 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     penUp (args, util) {
-        const target = util.target;
+        this._penUp(util.target);
+    }
+    _penUp (target) { // used by compiler
         const penState = this._getPenState(target);
 
         if (penState.penDown) {
@@ -968,8 +972,10 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     changePenHueBy (args, util) {
-        const penState = this._getPenState(util.target);
-        const hueChange = Cast.toNumber(args.HUE);
+        this._changePenHueBy(Cast.toNumber(args.HUE), util.target);
+    }
+    _changePenHueBy (hueChange, target) { // used by compiler
+        const penState = this._getPenState(target);
         const colorChange = hueChange / 2;
         this._setOrChangeColorParam(ColorParam.COLOR, colorChange, penState, true);
 

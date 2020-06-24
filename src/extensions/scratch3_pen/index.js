@@ -884,7 +884,7 @@ class Scratch3PenBlocks {
      * @param {boolean} change - if true change param by value, if false set param to value.
      * @private
      */
-    _setOrChangeColorParam (param, value, penState, change) {
+    _setOrChangeColorParam (param, value, penState, change) { // used by compiler
         switch (param) {
         case ColorParam.COLOR:
             penState.color = this._wrapColor(value + (change ? penState.color : 0));
@@ -937,8 +937,11 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     changePenSizeBy (args, util) {
-        const penAttributes = this._getPenState(util.target).penAttributes;
-        penAttributes.diameter = this._clampPenSize(penAttributes.diameter + Cast.toNumber(args.SIZE));
+        this._changePenSizeBy(Cast.toNumber(args.SIZE), util.target);
+    }
+    _changePenSizeBy (size, target) { // used by compiler
+        const penAttributes = this._getPenState(target).penAttributes;
+        penAttributes.diameter = this._clampPenSize(penAttributes.diameter + size);
     }
 
     /**
@@ -948,8 +951,11 @@ class Scratch3PenBlocks {
      * @param {object} util - utility object provided by the runtime.
      */
     setPenSizeTo (args, util) {
-        const penAttributes = this._getPenState(util.target).penAttributes;
-        penAttributes.diameter = this._clampPenSize(Cast.toNumber(args.SIZE));
+        this._setPenSizeTo(Cast.toNumber(args.SIZE), util.target);
+    }
+    _setPenSizeTo (size, target) { // used by compiler
+        const penAttributes = this._getPenState(target).penAttributes;
+        penAttributes.diameter = this._clampPenSize(size);
     }
 
     /* LEGACY OPCODES */

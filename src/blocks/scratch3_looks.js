@@ -329,7 +329,15 @@ class Scratch3LooksBlocks {
 
     say (args, util) {
         // @TODO in 2.0 calling say/think resets the right/left bias of the bubble
-        this.runtime.emit(Scratch3LooksBlocks.SAY_OR_THINK, util.target, 'say', args.MESSAGE);
+        let message = args.MESSAGE;
+        this._say(message, util.target);
+    }
+    _say (message, target) { // used by compiler
+        if (typeof message === 'number') {
+            message = parseFloat(message.toFixed(2));
+        }
+        message = String(message).substr(0, Scratch3LooksBlocks.SAY_BUBBLE_LIMIT);
+        this.runtime.emit('SAY', target, 'say', message);
     }
 
     sayforsecs (args, util) {

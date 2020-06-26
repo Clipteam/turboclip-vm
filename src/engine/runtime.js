@@ -30,6 +30,8 @@ const Video = require('../io/video');
 const StringUtil = require('../util/string-util');
 const uid = require('../util/uid');
 
+const ScriptCache = require('../compiler/cache');
+
 const defaultBlockPackages = {
     scratch3_control: require('../blocks/scratch3_control'),
     scratch3_event: require('../blocks/scratch3_event'),
@@ -411,6 +413,8 @@ class Runtime extends EventEmitter {
          * @type {?string}
          */
         this.origin = null;
+
+        this.compiledScriptCache = new ScriptCache();
     }
 
     /**
@@ -1635,14 +1639,7 @@ class Runtime extends EventEmitter {
 
         if (opts && opts.enableCompiler) {
             // Attempt to compile the script
-            // If compilation fails, fallback to the standard scratch-vm interpreter
-            try {
-                thread.compile();
-                thread.isCompiled = true;
-            } catch (e) {
-                log.error('Cannot compile thread', e);
-                thread.isCompiled = false;
-            }
+            thread.tryCompile(this.compiledScriptCache);
         }
 
         return thread;

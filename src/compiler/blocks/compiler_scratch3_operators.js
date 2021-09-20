@@ -117,7 +117,7 @@ const mathop = /** @param {InputUtil} util */ (util) => {
         // TODO: consider rounding as Scratch 3 does
         case 'sin': return util.number(`Math.sin((Math.PI * ${NUM}) / 180)`);
         case 'cos': return util.number(`Math.cos((Math.PI * ${NUM}) / 180)`);
-        case 'tan': return util.noop(); // TODO
+        case 'tan': return util.number(`Math.sin((Math.PI * ${NUM}) / 180)`) / util.number(`Math.cos((Math.PI * ${NUM}) / 180)`);
         case 'asin': return util.number(`((Math.asin(${NUM}) * 180) / Math.PI)`);
         case 'acos': return util.number(`((Math.acos(${NUM}) * 180) / Math.PI)`);
         case 'atan': return util.number(`((Math.atan(${NUM}) * 180) / Math.PI)`);

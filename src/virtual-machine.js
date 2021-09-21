@@ -210,6 +210,10 @@ class VirtualMachine extends EventEmitter {
     setCompatibilityMode (compatibilityModeOn) {
         this.runtime.setCompatibilityMode(!!compatibilityModeOn);
     }
+    
+    setUseCompiler (useCompiler) {
+        this.runtime.useCompiler = useCompiler;
+    }
 
     /**
      * Stop all threads and running activities.

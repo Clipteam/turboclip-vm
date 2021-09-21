@@ -179,7 +179,12 @@ let rendererDrawProfilerId = -1;
 class Runtime extends EventEmitter {
     constructor () {
         super();
-
+        
+        /**
+         * Control use compiler or not.
+         * @type {Boolean}
+         */
+        this.enableCompiler = false;
         /**
          * Target management and storage.
          * @type {Array.<!Target>}
@@ -1717,7 +1722,7 @@ class Runtime extends EventEmitter {
         opts = Object.assign({
             target: this._editingTarget,
             stackClick: false,
-            enableCompiler: true
+            enableCompiler: this.enableCompiler
         }, opts);
         // Remove any existing thread.
         for (let i = 0; i < this.threads.length; i++) {

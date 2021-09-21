@@ -522,7 +522,7 @@ class Compiler {
           this.jumps[label] = execute.createContinuation(this, parsedScript.slice(parseResult.labels[label]));
         }
 
-        log.info(`[${this.target.getName()}] compiled script`, script);
+        log.info(`[${this.target.getName()}] compiled script\n`, script);
         return startingLabelCount;
     }
 
